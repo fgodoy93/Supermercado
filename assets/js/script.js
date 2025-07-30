@@ -1,5 +1,3 @@
-let cliente = prompt("Ingrese su nombre: ")
-
 let totalCompra = 0
 const descuentoAplicado = 0.2
 const precioUmbralDescuento = 25000
@@ -54,6 +52,7 @@ let productos = [
 
 $(document).ready(function() {
     let contenedor = $("#contenedor-productos")
+    let cliente = prompt("Ingrese su nombre: ")
     let productoSeleccionado = null
     let carrito = []
 
@@ -64,7 +63,7 @@ $(document).ready(function() {
             <div class="col-md-4 mb-5">
                 <div class="card">
                     <img src="${producto.imagen}" alt="" class="card-img-top">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <h5 class="card-title">${producto.nombre}</h5>
                         <p class="card-text">$${producto.precio}</p>
                         <button class="btn btn-primary mt-3 añadirAlCarro" data-id="${producto.id}" data-bs-toggle="modal" data-bs-target="#modalReserva">Agregar al Carro</button>
@@ -95,7 +94,8 @@ $(document).ready(function() {
         if (cantidad === 0) {
             alert("Debes seleccionar al menos 1 unidad.");
             return;
-        }
+        } 
+
 
         // GUARDAR PRODUCTOS SELECCIONADOS DEL CARRITO DE COMPRAS
         carrito.push({
