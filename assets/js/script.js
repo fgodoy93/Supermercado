@@ -1,6 +1,6 @@
-let totalCompra = 0
-const descuentoAplicado = 0.2
-const precioUmbralDescuento = 25000
+let totalCompra = 0;
+const descuentoAplicado = 0.2;
+const precioUmbralDescuento = 25000;
 
 let productos = [
     {
@@ -30,31 +30,28 @@ let productos = [
         cantidad: 1,
         precio: 3000,
         imagen: "https://www.conservaslacruz.cl/wp-content/uploads/2020/11/mermelada-la-cruz.jpg",
-    }, 
-    {     
+    },
+    {
         id: 4,
         nombre: "Aceite de Oliva",
         cantidad: 1,
         precio: 6000,
         imagen: "https://www.conservaslacruz.cl/wp-content/uploads/2020/11/aceite-dr-500.jpg",
     },
-    {   
-        id: 5,  
+    {
+        id: 5,
         nombre: "Cuscus",
         cantidad: 1,
         precio: 2000,
         imagen: "https://www.conservaslacruz.cl/wp-content/uploads/2020/11/CUS-CUAS-1000GR-1.png",
     },
+];
 
-
-    
-]
-
-$(document).ready(function() {
-    let contenedor = $("#contenedor-productos")
-    let cliente = prompt("Ingrese su nombre: ")
-    let productoSeleccionado = null
-    let carrito = []
+$(document).ready(function () {
+    let contenedor = $("#contenedor-productos");
+    let cliente = "";
+    let productoSeleccionado = null;
+    let carrito = [];
 
     // MOSTRAR LAS CARDS
     for (let i = 0; i < productos.length; i++) {
@@ -75,29 +72,29 @@ $(document).ready(function() {
     }
 
     // AGREGAR PRODUCTOS AL CARRITO
-    $(document).on("click", ".añadirAlCarro", function() {
+    $(document).on("click", ".añadirAlCarro", function () {
+        if (carrito.length === 0) {
+                cliente = prompt("Ingrese su nombre:");
+            }
         let id = parseInt($(this).data("id"));
         for (let i = 0; i < productos.length; i++) {
             if (productos[i].id === id) {
                 productoSeleccionado = productos[i];
                 break;
-            }
+            } 
         }
         $("#agregarProducto").text(productoSeleccionado.nombre);
     });
 
-
     // CONFIRMAR PRODUCTOS
-    $("#confirmarProducto").on("click", function() {
+    $("#confirmarProducto").on("click", function () {
         let cantidad = parseInt($("#cantidad").val());
 
         if (cantidad === 0) {
             alert("Debes seleccionar al menos 1 unidad.");
             return;
-        } 
+        }
 
-
-        // GUARDAR PRODUCTOS SELECCIONADOS DEL CARRITO DE COMPRAS
         carrito.push({
             nombre: productoSeleccionado.nombre,
             cantidad: cantidad,
@@ -107,12 +104,12 @@ $(document).ready(function() {
 
         alert(`${cantidad} unidad(es) de ${productoSeleccionado.nombre} añadidas al carrito.`);
 
-        const modal = bootstrap.Modal.getInstance(document.getElementById("modalReserva"))
-        modal.hide()
+        const modal = bootstrap.Modal.getInstance(document.getElementById("modalReserva"));
+        modal.hide();
     });
 
     // PAGAR COMPRA
-    $("#botonPagar").on("click", function() {
+    $("#botonPagar").on("click", function () {
         if (carrito.length === 0) {
             alert("El carrito está vacío.");
             return;
@@ -127,7 +124,6 @@ $(document).ready(function() {
             totalCompra += item.subtotal;
         }
 
-        //DESCUENTO
         if (totalCompra >= precioUmbralDescuento) {
             let descuento = totalCompra * descuentoAplicado;
             let totalConDescuento = totalCompra - descuento;

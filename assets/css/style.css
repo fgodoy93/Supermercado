@@ -27,7 +27,7 @@ h1 {
 }
 
 .card {
-    background-color: #ffffff55;
+    background-color: #aec4b6da;
     border-radius: 20px;
     backdrop-filter: blur(5px);
     box-shadow: 0 4px 16px rgba(0,0,0,0.10);
@@ -60,9 +60,14 @@ h1 {
 }
 
 .card-img-top {
+    padding-top: 30px;
     height: 300px;
     object-fit: contain;
+    border-radius: 15px !important;
+}
 
+.card-img {
+    border-radius: 20px;
 }
 
 #botonPagar {
